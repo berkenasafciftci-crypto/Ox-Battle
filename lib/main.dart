@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/custom_text_field.dart';
-import 'widgets/primary_button.dart';
+import 'screens/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,51 +12,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Ox-Battle',
-      home: Scaffold(
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final horizontalPadding =
-                  constraints.maxWidth < 368 && constraints.maxWidth > 48
-                  ? 24.0
-                  : 0.0;
-              final contentWidth = constraints.maxWidth - horizontalPadding * 2;
-
-              return Center(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: horizontalPadding,
-                    vertical: 24,
-                  ),
-                  child: SizedBox(
-                    width: contentWidth < 320 ? contentWidth : 320,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const CustomTextField(
-                          hintText: 'Nickname',
-                          prefixIcon: Icon(
-                            Icons.person_outline,
-                            size: 20,
-                            color: Color(0xFF515960),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        PrimaryButton(
-                          text: 'Create an account',
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.signUp,
+      routes: AppRoutes.routes,
     );
+  }
+}
+
+abstract final class AppRoutes {
+  static const signUp = '/signup';
+  static const signIn = '/signin';
+  static const home = '/home';
+
+  static final Map<String, WidgetBuilder> routes =
+      Map<String, WidgetBuilder>.unmodifiable({
+        signUp: (_) => const SignUpScreen(),
+        signIn: (_) => const _ComingSoonScreen(title: 'Sign In'),
+        home: (_) => const _ComingSoonScreen(title: 'Home'),
+      });
+}
+
+class _ComingSoonScreen extends StatelessWidget {
+  const _ComingSoonScreen({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text('$title screen coming soon')));
   }
 }
