@@ -43,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 48),
                               const CustomTextField(
-                                hintText: 'Nickname',
+                                hintText: 'Username',
                                 prefixIcon: Icon(
                                   Icons.person_outline,
                                   size: 20,

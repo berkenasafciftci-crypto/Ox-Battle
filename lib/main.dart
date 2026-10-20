@@ -29,7 +29,7 @@ abstract final class AppRoutes {
       Map<String, WidgetBuilder>.unmodifiable({
         signUp: (_) => const SignUpScreen(),
         signIn: (_) => const _ComingSoonScreen(title: 'Sign In'),
-        home: (_) => const _ComingSoonScreen(title: 'Home'),
+        home: (_) => const _ComingSoonScreen(title: 'Homepage'),
       });
 }
 
