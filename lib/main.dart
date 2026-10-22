@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/main_layout_screen.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
 
@@ -30,17 +31,6 @@ abstract final class AppRoutes {
       Map<String, WidgetBuilder>.unmodifiable({
         signUp: (_) => const SignUpScreen(),
         signIn: (_) => const SignInScreen(),
-        home: (_) => const _ComingSoonScreen(title: 'Homepage'),
+        home: (_) => const MainLayoutScreen(),
       });
-}
-
-class _ComingSoonScreen extends StatelessWidget {
-  const _ComingSoonScreen({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('$title screen coming soon')));
-  }
 }

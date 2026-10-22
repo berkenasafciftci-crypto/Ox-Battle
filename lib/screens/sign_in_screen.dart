@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/social_auth_button.dart';
+import 'main_layout_screen.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,27 +80,49 @@ class SignInScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 36),
-                              const CustomTextField(
-                                hintText: 'Email',
-                                keyboardType: TextInputType.emailAddress,
-                                prefixIcon: Icon(
-                                  Icons.email,
-                                  size: 18,
-                                  color: Color(0xFF515960),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const CustomTextField(
-                                hintText: 'Password',
-                                obscureText: true,
-                                prefixIcon: Icon(
-                                  Icons.lock_outline,
-                                  size: 20,
-                                  color: Color(0xFF515960),
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    CustomTextField(
+                                      hintText: 'Email',
+                                      keyboardType: TextInputType.emailAddress,
+                                      prefixIcon: const Icon(
+                                        Icons.email,
+                                        size: 18,
+                                        color: Color(0xFF515960),
+                                      ),
+                                      validator: _requiredFieldValidator,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    CustomTextField(
+                                      hintText: 'Password',
+                                      obscureText: true,
+                                      prefixIcon: const Icon(
+                                        Icons.lock_outline,
+                                        size: 20,
+                                        color: Color(0xFF515960),
+                                      ),
+                                      validator: _requiredFieldValidator,
+                                    ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(height: 40),
-                              PrimaryButton(text: 'Login', onPressed: _noop),
+                              PrimaryButton(
+                                text: 'Login',
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MainLayoutScreen(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
                               const SizedBox(height: 44),
                               const _OrDivider(),
                               const SizedBox(height: 24),
@@ -134,6 +164,13 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String? _requiredFieldValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Lütfen boşluklari doldurunuz';
+    }
+    return null;
   }
 }
 
