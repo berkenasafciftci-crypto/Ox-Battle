@@ -1,11 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 import '../widgets/custom_text_field.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/social_auth_button.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  late final TapGestureRecognizer _loginTapRecognizer;
+  bool _showEmptyFieldsError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginTapRecognizer = TapGestureRecognizer()
+      ..onTap = () => Navigator.pushNamed(context, '/signin');
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _loginTapRecognizer.dispose();
+    super.dispose();
+  }
+
+  void _createAccount() {
+    final hasEmptyField =
+        _usernameController.text.trim().isEmpty ||
+        _emailController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty;
+
+    setState(() {
+      _showEmptyFieldsError = hasEmptyField;
+    });
+
+    if (!hasEmptyField) {
+      Navigator.pushNamed(context, '/home');
+    }
+  }
+
+  void _openSignIn() {
+    Navigator.pushNamed(context, '/signin');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +89,9 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 48),
-                              const CustomTextField(
+                              CustomTextField(
                                 hintText: 'Username',
+                                controller: _usernameController,
                                 prefixIcon: Icon(
                                   Icons.person_outline,
                                   size: 20,
@@ -51,8 +99,9 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              const CustomTextField(
+                              CustomTextField(
                                 hintText: 'Email',
+                                controller: _emailController,
                                 prefixIcon: Icon(
                                   Icons.mail_outline,
                                   size: 20,
@@ -60,8 +109,9 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              const CustomTextField(
+                              CustomTextField(
                                 hintText: 'Password',
+                                controller: _passwordController,
                                 prefixIcon: Icon(
                                   Icons.lock_outline,
                                   size: 20,
@@ -71,35 +121,46 @@ class SignUpScreen extends StatelessWidget {
                               const SizedBox(height: 16),
                               PrimaryButton(
                                 text: 'Create an account',
-                                onPressed: () {},
+                                onPressed: _createAccount,
                               ),
+                              if (_showEmptyFieldsError) ...[
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Lütfen boşlukları doldurun.',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: 'Nunito',
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                               const SizedBox(height: 32),
                               const _OrDivider(),
                               const SizedBox(height: 18),
                               SocialAuthButton(
                                 text: 'Sign up with Apple',
                                 icon: const Icon(Icons.apple, size: 20),
-                                onPressed: () {},
+                                onPressed: _openSignIn,
                               ),
                               const SizedBox(height: 12),
-                              const SocialAuthButton(
+                              SocialAuthButton(
                                 text: 'Sign up with Google',
                                 icon: Icon(
                                   Icons.g_mobiledata,
                                   color: Color(0xFF4285F4),
                                   size: 24,
                                 ),
-                                onPressed: _noop,
+                                onPressed: _openSignIn,
                               ),
                               const SizedBox(height: 12),
-                              const SocialAuthButton(
+                              SocialAuthButton(
                                 text: 'Sign up with SMS',
                                 icon: Icon(
                                   Icons.sms,
                                   color: Color(0xFF263038),
                                   size: 20,
                                 ),
-                                onPressed: _noop,
+                                onPressed: _openSignIn,
                               ),
                               const SizedBox(height: 64),
                               const Text(
@@ -117,8 +178,8 @@ class SignUpScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 44, bottom: 32),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 44, bottom: 32),
                           child: Text.rich(
                             TextSpan(
                               style: TextStyle(
@@ -132,6 +193,7 @@ class SignUpScreen extends StatelessWidget {
                                 TextSpan(text: 'Already got an account? '),
                                 TextSpan(
                                   text: 'LOGIN',
+                                  recognizer: _loginTapRecognizer,
                                   style: TextStyle(
                                     color: Color(0xFF2563EB),
                                     fontWeight: FontWeight.w700,
@@ -180,5 +242,3 @@ class _OrDivider extends StatelessWidget {
     );
   }
 }
-
-void _noop() {}

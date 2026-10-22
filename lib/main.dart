@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
 
 void main() {
@@ -28,7 +29,7 @@ abstract final class AppRoutes {
   static final Map<String, WidgetBuilder> routes =
       Map<String, WidgetBuilder>.unmodifiable({
         signUp: (_) => const SignUpScreen(),
-        signIn: (_) => const _ComingSoonScreen(title: 'Sign In'),
+        signIn: (_) => const SignInScreen(),
         home: (_) => const _ComingSoonScreen(title: 'Homepage'),
       });
 }

@@ -5,10 +5,16 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.prefixIcon,
+    this.keyboardType,
+    this.obscureText = false,
+    this.controller,
   });
 
   final String hintText;
   final Widget prefixIcon;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,9 @@ class CustomTextField extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: obscureText,
         style: const TextStyle(
           color: Color(0xFF2E2E2E),
           fontFamily: 'Nunito',
