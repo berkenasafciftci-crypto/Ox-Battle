@@ -14,7 +14,8 @@ class SearchBarWidget extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
 
-  static const _foregroundColor = Color(0xFF7D8388);
+  static const _textColor = Color(0xFF7D8388);
+  static const _backgroundColor = Color(0xFFF4F4F5);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class SearchBarWidget extends StatelessWidget {
           fontFamily: 'Nunito',
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: _foregroundColor,
+          color: _textColor,
         ),
         decoration: InputDecoration(
           hintText: hintText,
@@ -38,18 +39,27 @@ class SearchBarWidget extends StatelessWidget {
             fontFamily: 'Nunito',
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: _foregroundColor,
+            color: _textColor,
           ),
           filled: true,
-          fillColor: const Color(0xFFF4F4F5),
+          fillColor: _backgroundColor,
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 0),
-          prefixIcon: const Padding(
-            padding: EdgeInsets.only(left: 16, right: 8),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 8),
             child: SizedBox(
               width: 16,
               height: 16,
-              child: CustomPaint(painter: _SearchIconPainter()),
+              child: Align(
+                alignment: Alignment.center,
+                child: Transform.translate(
+                  offset: const Offset(0, 1),
+                  child: CustomPaint(
+                    size: const Size(16, 16),
+                    painter: _SearchIconPainter(),
+                  ),
+                ),
+              ),
             ),
           ),
           prefixIconConstraints: const BoxConstraints(
@@ -58,31 +68,29 @@ class SearchBarWidget extends StatelessWidget {
             minHeight: 40,
             maxHeight: 40,
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
+          border: _border,
+          enabledBorder: _border,
+          focusedBorder: _border,
         ),
       ),
     );
   }
+
+  static final _border = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(8),
+    borderSide: BorderSide.none,
+  );
 }
 
 class _SearchIconPainter extends CustomPainter {
   const _SearchIconPainter();
 
+  static const _iconColor = Color(0xFF7D8388);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF7D8388)
+      ..color = _iconColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;
