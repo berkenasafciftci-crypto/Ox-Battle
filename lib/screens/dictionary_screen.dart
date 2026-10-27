@@ -52,32 +52,17 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.maybePop(context),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(
-                      minWidth: 24,
-                      minHeight: 32,
-                    ),
-                    icon: const Icon(
-                      Icons.close,
-                      size: 20,
-                      color: Color(0xFF263038),
-                    ),
+              const Padding(
+                padding: EdgeInsets.only(left: 4),
+                child: Text(
+                  'Dictionary',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF263038),
                   ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Dictionary',
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF263038),
-                    ),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(height: 8),
               LayoutBuilder(

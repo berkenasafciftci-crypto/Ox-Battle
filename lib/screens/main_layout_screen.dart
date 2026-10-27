@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dictionary_screen.dart';
 import 'homepage_screen.dart';
 import 'profile_screen.dart';
-import 'rewiew_screen.dart';
+import 'review_screen.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -18,7 +18,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   static const _screens = <Widget>[
     HomepageScreen(),
     DictionaryScreen(),
-    RewiewScreen(),
+    ReviewScreen(),
     ProfileScreen(),
   ];
 
