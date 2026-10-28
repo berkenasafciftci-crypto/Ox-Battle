@@ -7,12 +7,14 @@ class CategoryCard extends StatelessWidget {
     required this.title,
     this.isHorizontal = false,
     this.onTap,
+    this.width,
   });
 
   final String imagePath;
   final String title;
   final bool isHorizontal;
   final VoidCallback? onTap;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -20,44 +22,52 @@ class CategoryCard extends StatelessWidget {
       return _buildHorizontalCard();
     }
 
+    final cardWidth = width ?? 68;
+    final imageHeight = cardWidth * 71 / 68;
+    final labelHeight = cardWidth * 21 / 68;
     final uri = Uri.tryParse(imagePath);
     final imageProvider =
         uri != null && (uri.scheme == 'http' || uri.scheme == 'https')
         ? Image.network(
             imagePath,
-            width: 68,
-            height: 71,
+            width: cardWidth,
+            height: imageHeight,
             fit: BoxFit.cover,
             errorBuilder: _buildImageFallback,
           )
         : Image.asset(
             imagePath,
-            width: 68,
-            height: 71,
+            width: cardWidth,
+            height: imageHeight,
             fit: BoxFit.cover,
             errorBuilder: _buildImageFallback,
           );
 
     return SizedBox(
-      width: 68,
-      height: 102,
+      width: cardWidth,
+      height: cardWidth * 102 / 68,
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(cardWidth * 10 / 68),
             child: imageProvider,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: cardWidth * 10 / 68),
           SizedBox(
-            width: 68,
-            height: 21,
+            width: cardWidth,
+            height: labelHeight,
             child: Center(
               child: Text(
                 title,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontFamily: 'Nunito', fontSize: 12),
+                style: TextStyle(
+                  color: const Color(0xFF1C1C1C),
+                  fontFamily: 'Nunito',
+                  fontSize: cardWidth * 12 / 68,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
@@ -71,38 +81,38 @@ class CategoryCard extends StatelessWidget {
     final image = uri != null && (uri.scheme == 'http' || uri.scheme == 'https')
         ? Image.network(
             imagePath,
-            width: 56,
-            height: 56,
+            width: 60,
+            height: 60,
             fit: BoxFit.cover,
             errorBuilder: _buildImageFallback,
           )
         : Image.asset(
             imagePath,
-            width: 56,
-            height: 56,
+            width: 60,
+            height: 60,
             fit: BoxFit.cover,
             errorBuilder: _buildImageFallback,
           );
 
     return SizedBox(
       width: double.infinity,
-      height: 80,
+      height: 84,
       child: TextButton(
         onPressed: onTap,
         style: TextButton.styleFrom(
           backgroundColor: Colors.white,
-          foregroundColor: const Color(0xFF263038),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          foregroundColor: const Color(0xFF1C1C1C),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
           alignment: Alignment.centerLeft,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
-            side: const BorderSide(color: Color(0xFFE7E7E7)),
+            side: const BorderSide(color: Color(0xFFF3F3F5), width: 2),
           ),
         ),
         child: Row(
           children: [
-            ClipRRect(borderRadius: BorderRadius.circular(6), child: image),
-            const SizedBox(width: 8),
+            ClipRRect(borderRadius: BorderRadius.circular(8), child: image),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 title,
@@ -110,7 +120,7 @@ class CategoryCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontFamily: 'Nunito',
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -126,8 +136,8 @@ class CategoryCard extends StatelessWidget {
     Object error,
     StackTrace? stackTrace,
   ) {
-    final imageSize = isHorizontal ? 56.0 : 68.0;
-    final imageHeight = isHorizontal ? 56.0 : 71.0;
+    final imageSize = isHorizontal ? 60.0 : (width ?? 68);
+    final imageHeight = isHorizontal ? 60.0 : imageSize * 71 / 68;
 
     return SizedBox(
       width: imageSize,

@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="user">
+<g id="Vector">
+<use xlink:href="#stroke0_0_238" stroke="#515960"/>
+<use xlink:href="#stroke0_0_238" stroke="black" stroke-opacity="0.2"/>
+</g>
+<g id="Vector_2">
+<use xlink:href="#stroke1_0_238" stroke="#515960"/>
+<use xlink:href="#stroke1_0_238" stroke="black" stroke-opacity="0.2"/>
+</g>
+<g id="Vector_3" opacity="0">
+<use xlink:href="#stroke2_0_238" stroke="#515960"/>
+<use xlink:href="#stroke2_0_238" stroke="black" stroke-opacity="0.2"/>
+</g>
+</g>
+<defs>
+<path id="stroke0_0_238" d="M12 12C14.5809 12 16.6731 9.90785 16.6731 7.32693C16.6731 4.74606 14.5809 2.65385 12 2.65385C9.41917 2.65385 7.32692 4.74606 7.32692 7.32693C7.32692 9.90785 9.41917 12 12 12Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="stroke1_0_238" d="M4.64423 19.4219C4.64423 16.8714 6.71183 14.8038 9.26234 14.8038H14.7665C17.317 14.8038 19.3846 16.8714 19.3846 19.4219C19.3846 20.4846 18.5231 21.3461 17.4604 21.3461H6.56845C5.50573 21.3461 4.64423 20.4846 4.64423 19.4219Z" stroke-width="1.5"/>
+<path id="stroke2_0_238" d="M0.75 0.75H23.25V23.25H0.75V0.75Z" stroke-width="1.5"/>
+</defs>
+</svg>

@@ -6,11 +6,13 @@ class SocialAuthButton extends StatelessWidget {
     required this.text,
     required this.icon,
     required this.onPressed,
+    this.backgroundColor = const Color(0xFFE9EFFD),
   });
 
   final String text;
   final Widget icon;
   final VoidCallback onPressed;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class SocialAuthButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFE9EFFD),
+          backgroundColor: backgroundColor,
           foregroundColor: const Color(0xFF263038),
           elevation: 0,
           padding: const EdgeInsets.only(left: 18, right: 24),

@@ -44,38 +44,19 @@ class _ReviewScreenState extends State<ReviewScreen> {
         bottom: false,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 44,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  const Text(
-                    'Your saved Words',
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      height: 1.5,
-                      color: Color(0xFF263238),
-                    ),
+              child: Center(
+                child: Text(
+                  'Your saved Words',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    height: 1.5,
+                    color: Color(0xFF263038),
                   ),
-                  Positioned(
-                    left: 14,
-                    child: IconButton(
-                      onPressed: () => Navigator.maybePop(context),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(
-                        minWidth: 40,
-                        minHeight: 40,
-                      ),
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: 20,
-                        color: Color(0xFF263238),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
             const SizedBox(height: 8),
@@ -137,9 +118,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                   word['subtitle'] as String,
                                   style: const TextStyle(
                                     fontFamily: 'Nunito',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.4,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.5,
                                     color: Color(0xFF7D8388),
                                   ),
                                 ),

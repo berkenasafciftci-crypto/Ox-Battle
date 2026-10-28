@@ -60,6 +60,9 @@ flutter:
     - family: Nunito
       fonts:
         - asset: assets/fonts/Nunito-Variable.ttf
+  assets:
+    - assets/images/levels/
+    - assets/images/figma/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

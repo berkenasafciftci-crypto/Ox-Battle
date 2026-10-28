@@ -1,71 +1,80 @@
 import 'package:flutter/material.dart';
 
 class StudyProgressCard extends StatelessWidget {
-  const StudyProgressCard({super.key, this.progressSize = 76});
+  const StudyProgressCard({super.key, this.progressSize = 136.26});
 
   final double progressSize;
 
-  static const _blue = Color(0xFF2864EB);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 18,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'How many hours you studied this week',
-                style: const TextStyle(
-                  color: Color(0xFF202124),
-                  fontFamily: 'Nunito',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final size = progressSize < constraints.maxWidth * 0.43
+            ? progressSize
+            : constraints.maxWidth * 0.43;
+        final textWidth = (constraints.maxWidth - size - 7).clamp(0.0, 177.0);
+
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.09),
+                blurRadius: 27,
               ),
-            ),
+            ],
           ),
-          const SizedBox(width: 16),
-          SizedBox(
-            width: progressSize,
-            height: progressSize,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                const CircularProgressIndicator(
-                  value: 0.65,
-                  strokeWidth: 6,
-                  backgroundColor: Color(0xFFE8EEFC),
-                  valueColor: AlwaysStoppedAnimation<Color>(_blue),
-                ),
-                const Text(
-                  '2h 15m',
-                  style: TextStyle(
-                    color: Color(0xFF202124),
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 16,
+                top: 0,
+                bottom: 0,
+                width: textWidth,
+                child: const Center(
+                  child: Text(
+                    'How many hours you studied this week',
+                    style: TextStyle(
+                      color: Color(0xFF1C1C1C),
+                      fontFamily: 'Nunito',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      height: 1.3,
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                right: 0,
+                top: 5,
+                width: size,
+                height: size,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/figma/home_progress.png',
+                      width: size,
+                      height: size,
+                      fit: BoxFit.contain,
+                    ),
+                    const Text(
+                      '2h 15m',
+                      style: TextStyle(
+                        color: Color(0xFF1C1C1C),
+                        fontFamily: 'Nunito',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

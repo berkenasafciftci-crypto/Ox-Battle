@@ -22,6 +22,8 @@ class _SignInScreenState extends State<SignInScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
+            final contentWidth = (constraints.maxWidth - 40).clamp(0.0, 320.0);
+
             return SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
@@ -30,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 48,
+                        height: 44,
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
@@ -45,41 +47,48 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: IconButton(
-                                onPressed: () => Navigator.maybePop(context),
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(
-                                  minWidth: 40,
-                                  minHeight: 40,
-                                ),
-                                icon: const Icon(
-                                  Icons.arrow_back,
-                                  color: Color(0xFF263038),
-                                  size: 22,
+                              child: InkWell(
+                                onTap: () => Navigator.maybePop(context),
+                                borderRadius: BorderRadius.circular(50),
+                                child: SizedBox(
+                                  width: 48,
+                                  height: 40,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/figma/back_arrow.png',
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 36),
+                      const SizedBox(height: 8),
                       Center(
                         child: SizedBox(
-                          width: 320,
+                          width: contentWidth,
                           child: Column(
                             children: [
-                              const Text(
-                                'Ox-Battle',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF2864EB),
-                                  fontFamily: 'Nunito',
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w800,
-                                  height: 1.3,
+                              const SizedBox(
+                                height: 58,
+                                child: Center(
+                                  child: Text(
+                                    'Ox-Battle',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF2563EB),
+                                      fontFamily: 'Nunito',
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w800,
+                                      height: 1.3,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              const SizedBox(height: 36),
+                              const SizedBox(height: 26),
                               Form(
                                 key: _formKey,
                                 child: Column(
@@ -87,10 +96,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                     CustomTextField(
                                       hintText: 'Email',
                                       keyboardType: TextInputType.emailAddress,
-                                      prefixIcon: const Icon(
-                                        Icons.email,
-                                        size: 18,
-                                        color: Color(0xFF515960),
+                                      prefixIcon: Image.asset(
+                                        'assets/images/figma/signup_email.png',
+                                        width: 20,
+                                        height: 20,
                                       ),
                                       validator: _requiredFieldValidator,
                                     ),
@@ -98,19 +107,22 @@ class _SignInScreenState extends State<SignInScreen> {
                                     CustomTextField(
                                       hintText: 'Password',
                                       obscureText: true,
-                                      prefixIcon: const Icon(
-                                        Icons.lock_outline,
-                                        size: 20,
-                                        color: Color(0xFF515960),
+                                      prefixIcon: Image.asset(
+                                        'assets/images/figma/signup_lock.png',
+                                        width: 20,
+                                        height: 20,
                                       ),
                                       validator: _requiredFieldValidator,
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 40),
+                              const SizedBox(height: 43),
                               PrimaryButton(
                                 text: 'Login',
+                                height: 40,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     Navigator.pushReplacement(
@@ -125,30 +137,37 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               const SizedBox(height: 44),
                               const _OrDivider(),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 42),
                               SocialAuthButton(
                                 text: 'Sign in with Apple',
-                                icon: const Icon(Icons.apple, size: 20),
+                                icon: Image.asset(
+                                  'assets/images/figma/social_apple.png',
+                                  width: 20,
+                                  height: 20,
+                                ),
+                                backgroundColor: const Color(0xFFE3EDFF),
                                 onPressed: _noop,
                               ),
                               const SizedBox(height: 12),
-                              const SocialAuthButton(
+                              SocialAuthButton(
                                 text: 'Sign in with Google',
-                                icon: Icon(
-                                  Icons.g_mobiledata,
-                                  color: Color(0xFF4285F4),
-                                  size: 24,
+                                icon: Image.asset(
+                                  'assets/images/figma/social_google.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
+                                backgroundColor: const Color(0xFFE3EDFF),
                                 onPressed: _noop,
                               ),
                               const SizedBox(height: 12),
-                              const SocialAuthButton(
+                              SocialAuthButton(
                                 text: 'Sign in with SMS',
-                                icon: Icon(
-                                  Icons.sms,
-                                  color: Color(0xFF263038),
-                                  size: 20,
+                                icon: Image.asset(
+                                  'assets/images/figma/social_sms.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
+                                backgroundColor: const Color(0xFFE3EDFF),
                                 onPressed: _noop,
                               ),
                             ],
@@ -187,7 +206,7 @@ class _OrDivider extends StatelessWidget {
           child: Text(
             'OR',
             style: TextStyle(
-              color: Color(0xFFA8ACAF),
+              color: Color(0xFFBEC1C4),
               fontFamily: 'Nunito',
               fontSize: 12,
               fontWeight: FontWeight.w700,

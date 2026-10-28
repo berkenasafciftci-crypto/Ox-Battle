@@ -11,14 +11,38 @@ class DictionaryScreen extends StatefulWidget {
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
   static const _categories = <({String imagePath, String title})>[
-    (imagePath: 'https://picsum.photos/seed/category1/100', title: 'Kategori1'),
-    (imagePath: 'https://picsum.photos/seed/category2/100', title: 'Kategori2'),
-    (imagePath: 'https://picsum.photos/seed/category3/100', title: 'Kategori3'),
-    (imagePath: 'https://picsum.photos/seed/category4/100', title: 'Kategori4'),
-    (imagePath: 'https://picsum.photos/seed/category5/100', title: 'Kategori5'),
-    (imagePath: 'https://picsum.photos/seed/category6/100', title: 'Kategori6'),
-    (imagePath: 'https://picsum.photos/seed/category7/100', title: 'Kategori7'),
-    (imagePath: 'https://picsum.photos/seed/category8/100', title: 'Kategori8'),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_1.jpg',
+      title: 'Kategori1',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_1.jpg',
+      title: 'Kategori2',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_1.jpg',
+      title: 'Kategori3',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_1.jpg',
+      title: 'Kategori4',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_2.jpg',
+      title: 'Kategori5',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_2.jpg',
+      title: 'Kategori6',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_2.jpg',
+      title: 'Kategori7',
+    ),
+    (
+      imagePath: 'assets/images/figma/dictionary_image_2.jpg',
+      title: 'Kategori8',
+    ),
   ];
 
   String _searchQuery = '';
@@ -45,32 +69,36 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFBFCFF),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 4),
-                child: Text(
-                  'Dictionary',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF263038),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 320),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 44,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 36),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Dictionary',
+                          style: const TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            height: 1.5,
+                            color: Color(0xFF263038),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  return SizedBox(
-                    width: constraints.maxWidth < 320
-                        ? constraints.maxWidth
-                        : 320,
+                  Center(
                     child: SearchBarWidget(
                       onChanged: (query) {
                         setState(() {
@@ -78,20 +106,20 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                         });
                       },
                     ),
-                  );
-                },
+                  ),
+                  const SizedBox(height: 12),
+                  for (final category in _visibleCategories) ...[
+                    CategoryCard(
+                      title: category.title,
+                      imagePath: category.imagePath,
+                      isHorizontal: true,
+                      onTap: () => _openCategory(category.title),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ],
               ),
-              const SizedBox(height: 12),
-              for (final category in _visibleCategories) ...[
-                CategoryCard(
-                  title: category.title,
-                  imagePath: category.imagePath,
-                  isHorizontal: true,
-                  onTap: () => _openCategory(category.title),
-                ),
-                const SizedBox(height: 8),
-              ],
-            ],
+            ),
           ),
         ),
       ),

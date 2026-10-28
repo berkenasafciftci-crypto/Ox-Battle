@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="user">
+<g id="Vector">
+<use xlink:href="#stroke0_0_288" stroke="#515960"/>
+<use xlink:href="#stroke0_0_288" stroke="black" stroke-opacity="0.2"/>
+</g>
+<g id="Vector_2">
+<use xlink:href="#stroke1_0_288" stroke="#515960"/>
+<use xlink:href="#stroke1_0_288" stroke="black" stroke-opacity="0.2"/>
+</g>
+<g id="Vector_3" opacity="0">
+<use xlink:href="#stroke2_0_288" stroke="#515960"/>
+<use xlink:href="#stroke2_0_288" stroke="black" stroke-opacity="0.2"/>
+</g>
+</g>
+<defs>
+<path id="stroke0_0_288" d="M10 10C12.1508 10 13.8942 8.25654 13.8942 6.10578C13.8942 3.95505 12.1508 2.21154 10 2.21154C7.84931 2.21154 6.10577 3.95505 6.10577 6.10578C6.10577 8.25654 7.84931 10 10 10Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="stroke1_0_288" d="M3.87019 16.1849C3.87019 14.0595 5.59319 12.3365 7.71862 12.3365H12.3054C14.4308 12.3365 16.1538 14.0595 16.1538 16.1849C16.1538 17.0705 15.4359 17.7884 14.5503 17.7884H5.47371C4.58811 17.7884 3.87019 17.0705 3.87019 16.1849Z" stroke-width="1.5"/>
+<path id="stroke2_0_288" d="M0.75 0.75H19.25V19.25H0.75V0.75Z" stroke-width="1.5"/>
+</defs>
+</svg>

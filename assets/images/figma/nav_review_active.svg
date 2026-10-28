@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="book">
+<path id="Vector" d="M3.49964 18V6.99998C3.49964 2.99998 4.49964 1.99998 8.49964 1.99998H15.4996C19.4996 1.99998 20.4996 2.99998 20.4996 6.99998V17C20.4996 17.14 20.4996 17.28 20.4896 17.42" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="#FE9519"/>
+<path id="Vector_2" d="M6.34964 15H20.4996V18.5C20.4996 20.43 18.9296 22 16.9996 22H6.99964C5.06965 22 3.49964 20.43 3.49964 18.5V17.85C3.49964 16.28 4.77964 15 6.34964 15Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="#FE9519"/>
+<path id="Vector_3" d="M7.99964 7.00002H15.9996" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="#FE9519"/>
+<path id="Vector_4" d="M7.99964 10.5H12.9996" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="#FE9519"/>
+<path id="Vector_5" opacity="0" d="M23.5 23.5L0.5 23.5L0.5 0.5L23.5 0.5L23.5 23.5Z" stroke="#FE9519"/>
+</g>
+</svg>

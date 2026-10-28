@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           width: contentWidth,
                           child: Column(
                             children: [
-                              const SizedBox(height: 40),
+                              const SizedBox(height: 48),
                               const Text(
                                 'Welcome to Ox-Battle',
                                 textAlign: TextAlign.center,
@@ -88,37 +88,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   height: 1.3,
                                 ),
                               ),
-                              const SizedBox(height: 48),
+                              const SizedBox(height: 54),
                               CustomTextField(
                                 hintText: 'Username',
                                 controller: _usernameController,
-                                prefixIcon: Icon(
-                                  Icons.person_outline,
-                                  size: 20,
-                                  color: Color(0xFF515960),
+                                prefixIcon: Image.asset(
+                                  'assets/images/figma/signup_user.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               CustomTextField(
                                 hintText: 'Email',
                                 controller: _emailController,
-                                prefixIcon: Icon(
-                                  Icons.mail_outline,
-                                  size: 20,
-                                  color: Color(0xFF515960),
+                                prefixIcon: Image.asset(
+                                  'assets/images/figma/signup_email.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               CustomTextField(
                                 hintText: 'Password',
                                 controller: _passwordController,
-                                prefixIcon: Icon(
-                                  Icons.lock_outline,
-                                  size: 20,
-                                  color: Color(0xFF515960),
+                                prefixIcon: Image.asset(
+                                  'assets/images/figma/signup_lock.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 25),
                               PrimaryButton(
                                 text: 'Create an account',
                                 onPressed: _createAccount,
@@ -134,35 +134,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                 ),
                               ],
-                              const SizedBox(height: 32),
+                              const SizedBox(height: 28),
                               const _OrDivider(),
-                              const SizedBox(height: 18),
+                              const SizedBox(height: 19),
                               SocialAuthButton(
                                 text: 'Sign up with Apple',
-                                icon: const Icon(Icons.apple, size: 20),
+                                icon: Image.asset(
+                                  'assets/images/figma/social_apple.png',
+                                  width: 20,
+                                  height: 20,
+                                ),
                                 onPressed: _openSignIn,
                               ),
                               const SizedBox(height: 12),
                               SocialAuthButton(
                                 text: 'Sign up with Google',
-                                icon: Icon(
-                                  Icons.g_mobiledata,
-                                  color: Color(0xFF4285F4),
-                                  size: 24,
+                                icon: Image.asset(
+                                  'assets/images/figma/social_google.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                                 onPressed: _openSignIn,
                               ),
                               const SizedBox(height: 12),
                               SocialAuthButton(
                                 text: 'Sign up with SMS',
-                                icon: Icon(
-                                  Icons.sms,
-                                  color: Color(0xFF263038),
-                                  size: 20,
+                                icon: Image.asset(
+                                  'assets/images/figma/social_sms.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                                 onPressed: _openSignIn,
                               ),
-                              const SizedBox(height: 64),
+                              const SizedBox(height: 37),
                               const Text(
                                 'By creating an account you agree to our\n'
                                 'Terms of Service and Privacy Policy',
@@ -179,7 +183,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 44, bottom: 32),
+                          padding: const EdgeInsets.only(top: 52, bottom: 32),
                           child: Text.rich(
                             TextSpan(
                               style: TextStyle(
