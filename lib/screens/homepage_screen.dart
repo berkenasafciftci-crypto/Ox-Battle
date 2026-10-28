@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'level_screen.dart';
 import '../widgets/category_card.dart';
 import '../widgets/study_progress.dart';
 
@@ -73,9 +74,26 @@ class HomepageScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final category = _categories[index];
-                  return CategoryCard(
-                    imagePath: category.imagePath,
-                    title: category.title,
+                  void openLevelScreen() {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (context) => const LevelScreen(),
+                      ),
+                    );
+                  }
+
+                  return TextButton(
+                    onPressed: openLevelScreen,
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: CategoryCard(
+                      imagePath: category.imagePath,
+                      title: category.title,
+                      onTap: openLevelScreen,
+                    ),
                   );
                 },
               ),
