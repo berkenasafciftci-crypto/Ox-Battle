@@ -97,6 +97,7 @@ class AvatarPortrait extends StatelessWidget {
       width: size,
       height: size,
       fit: BoxFit.cover,
+      filterQuality: FilterQuality.high,
     );
   }
 }

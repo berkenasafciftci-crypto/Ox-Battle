@@ -15,16 +15,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   static const _figmaAvatar = 'assets/images/figma/profile_avatar.png';
 
   static const _avatarOptions = <String>[
-    _figmaAvatar,
-    'placeholder-avatar-1',
-    'placeholder-avatar-2',
-    'placeholder-avatar-3',
-    'placeholder-avatar-4',
-    'placeholder-avatar-5',
-    'placeholder-avatar-6',
-    'placeholder-avatar-7',
-    'placeholder-avatar-8',
-    'placeholder-avatar-9',
+    'assets/images/figma/avatar_option_1.png',
+    'assets/images/figma/avatar_option_2.png',
+    'assets/images/figma/avatar_option_3.png',
+    'assets/images/figma/avatar_option_4.png',
+    'assets/images/figma/avatar_option_5.png',
+    'assets/images/figma/avatar_option_6.png',
+    'assets/images/figma/avatar_option_7.png',
+    'assets/images/figma/avatar_option_8.png',
+    'assets/images/figma/avatar_option_9.png',
   ];
 
   static const _weekdays = <String>[
