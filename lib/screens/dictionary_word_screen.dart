@@ -106,29 +106,33 @@ class _DictionaryWordRow extends StatelessWidget {
                 children: [
                   Text(
                     word.word,
-                    style: const TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      height: 1.3,
-                      color: Color(0xFF2E2E2E),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    word.subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontFamily: 'Nunito',
                       fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      height: 1.25,
+                      color: Color(0xFF2E2E2E),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    word.subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      height: 1.5,
+                      height: 1.25,
                       color: Color(0xFF7D8388),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 8),
             AnimatedBuilder(
               animation: favorites,
               builder: (context, child) {
@@ -146,9 +150,32 @@ class _DictionaryWordRow extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(
+              width: 16,
+              height: 16,
+              child: CustomPaint(painter: _WordSignalPainter()),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+class _WordSignalPainter extends CustomPainter {
+  const _WordSignalPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final mutedPaint = Paint()..color = const Color(0xFFBEC1C4);
+    final activePaint = Paint()..color = const Color(0xFFE2222E);
+    final baseline = size.height - 1;
+
+    canvas.drawRect(Rect.fromLTRB(1, baseline - 6, 4, baseline), activePaint);
+    canvas.drawRect(Rect.fromLTRB(6, baseline - 10, 9, baseline), mutedPaint);
+    canvas.drawRect(Rect.fromLTRB(11, baseline - 13, 14, baseline), mutedPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _WordSignalPainter oldDelegate) => false;
 }
