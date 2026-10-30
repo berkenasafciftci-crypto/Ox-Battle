@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StudyProgressCard extends StatelessWidget {
-  const StudyProgressCard({super.key, this.progressSize = 136.26});
+  const StudyProgressCard({
+    super.key,
+    this.progressSize = 136.26,
+    this.textLeft = 16,
+  });
 
   final double progressSize;
+  final double textLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class StudyProgressCard extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                left: 16,
+                left: textLeft,
                 top: 0,
                 bottom: 0,
                 width: textWidth,

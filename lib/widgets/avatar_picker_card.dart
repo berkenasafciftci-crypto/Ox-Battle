@@ -12,12 +12,8 @@ class AvatarPickerButton extends StatelessWidget {
   final VoidCallback onTap;
   final double size;
 
-  static const _editBadgeColor = Color(0xFF2563EB);
-
   @override
   Widget build(BuildContext context) {
-    final badgeSize = size * 0.24;
-
     return Semantics(
       button: true,
       label: 'Change avatar',
@@ -37,20 +33,13 @@ class AvatarPickerButton extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: 0,
-                bottom: 1,
-                child: Container(
-                  width: badgeSize,
-                  height: badgeSize,
-                  decoration: const BoxDecoration(
-                    color: _editBadgeColor,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                    size: badgeSize * 0.62,
-                  ),
+                right: -3,
+                bottom: 6,
+                child: Image.asset(
+                  'assets/images/figma/profile_avatar_edit.png',
+                  width: 24,
+                  height: 25,
+                  fit: BoxFit.contain,
                 ),
               ),
             ],
