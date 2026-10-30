@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../data/favorites_store.dart';
+import '../data/vocabulary_catalog.dart';
+import '../models/vocabulary_word.dart';
 import '../widgets/quiz_option_box.dart';
 
 class CompetitionScreen extends StatefulWidget {
@@ -23,6 +26,9 @@ class _CompetitionScreenState extends State<CompetitionScreen> {
   ];
 
   var _questionIndex = 0;
+
+  VocabularyWord get _currentWord =>
+      VocabularyCatalog.words[_questionIndex % VocabularyCatalog.words.length];
 
   void _advanceQuestion() {
     setState(() {
@@ -143,14 +149,44 @@ class _CompetitionScreenState extends State<CompetitionScreen> {
                                           ),
                                         ),
                                       ),
-                                      const Text(
-                                        '...',
-                                        style: TextStyle(
+                                      Text(
+                                        _currentWord.word,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Nunito',
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                           height: 1.5,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: -8,
+                                        right: -4,
+                                        child: AnimatedBuilder(
+                                          animation: FavoritesStore.instance,
+                                          builder: (context, child) {
+                                            final isFavorite = FavoritesStore
+                                                .instance
+                                                .isFavorite(_currentWord.id);
+                                            return IconButton(
+                                              tooltip: isFavorite
+                                                  ? 'Remove from review'
+                                                  : 'Save to review',
+                                              onPressed: () => FavoritesStore
+                                                  .instance
+                                                  .toggle(_currentWord),
+                                              icon: Icon(
+                                                isFavorite
+                                                    ? Icons.favorite
+                                                    : Icons.favorite_border,
+                                                color: isFavorite
+                                                    ? const Color(0xFFE2222E)
+                                                    : const Color(0xFFBEC1C4),
+                                                size: 22,
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/category_card.dart';
 import '../widgets/search_bar_widget.dart';
+import 'dictionary_word_screen.dart';
 
 class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({super.key});
@@ -61,7 +63,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   void _openCategory(String title) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (context) => _CategoryWordsScreen(categoryTitle: title),
+        builder: (context) => DictionaryWordScreen(categoryTitle: title),
       ),
     );
   }
@@ -120,43 +122,6 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                 ],
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _CategoryWordsScreen extends StatelessWidget {
-  const _CategoryWordsScreen({required this.categoryTitle});
-
-  final String categoryTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF263038),
-        elevation: 0,
-        title: Text(
-          categoryTitle,
-          style: const TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      body: const Center(
-        child: Text(
-          'Bu kategoriye ait kelimeler burada listelenecek.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 14,
-            color: Color(0xFF7D8388),
           ),
         ),
       ),

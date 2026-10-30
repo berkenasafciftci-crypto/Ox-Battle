@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/favorites_store.dart';
 import '../widgets/search_bar_widget.dart';
 
 class ReviewScreen extends StatefulWidget {
@@ -10,34 +11,12 @@ class ReviewScreen extends StatefulWidget {
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  static const _savedWords = <Map<String, dynamic>>[
-    {'word': 'as many as', 'subtitle': 'as many as'},
-    {'word': 'City break', 'subtitle': 'City break'},
-    {'word': 'Cosmopolitan', 'subtitle': 'Cosmopolitan'},
-    {'word': 'Crowded', 'subtitle': 'Crowded'},
-    {'word': 'Embassy', 'subtitle': 'Embassy'},
-    {'word': 'Getaway', 'subtitle': 'Getaway'},
-    {'word': 'Disappointing', 'subtitle': 'Disappointing'},
-    {'word': 'Jaw-dropping', 'subtitle': 'Jaw-dropping'},
-    {'word': 'Lively', 'subtitle': 'Lively'},
-  ];
-
   String _searchQuery = '';
-
-  List<Map<String, dynamic>> get _visibleWords {
-    final query = _searchQuery.trim().toLowerCase();
-    if (query.isEmpty) {
-      return _savedWords;
-    }
-
-    return _savedWords.where((word) {
-      return (word['word'] as String).toLowerCase().contains(query) ||
-          (word['subtitle'] as String).toLowerCase().contains(query);
-    }).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final favorites = FavoritesStore.instance;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -82,59 +61,87 @@ class _ReviewScreenState extends State<ReviewScreen> {
             const SizedBox(height: 8),
             const Divider(height: 1, thickness: 1, color: Color(0xFFEAEBEC)),
             Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                itemCount: _visibleWords.length,
-                separatorBuilder: (context, index) => const Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Color(0xFFEAEBEC),
-                ),
-                itemBuilder: (context, index) {
-                  final word = _visibleWords[index];
-                  return SizedBox(
-                    height: 66,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  word['word'] as String,
-                                  style: const TextStyle(
-                                    fontFamily: 'Nunito',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.3,
-                                    color: Color(0xFF2E2E2E),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  word['subtitle'] as String,
-                                  style: const TextStyle(
-                                    fontFamily: 'Nunito',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.5,
-                                    color: Color(0xFF7D8388),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CustomPaint(painter: _WordSignalPainter()),
-                          ),
-                        ],
+              child: AnimatedBuilder(
+                animation: favorites,
+                builder: (context, child) {
+                  final query = _searchQuery.trim().toLowerCase();
+                  final visibleWords = favorites.words.where((word) {
+                    return word.word.toLowerCase().contains(query) ||
+                        word.subtitle.toLowerCase().contains(query);
+                  }).toList();
+
+                  if (visibleWords.isEmpty) {
+                    return Center(
+                      child: Text(
+                        query.isEmpty
+                            ? 'No saved words yet'
+                            : 'No matching words',
+                        style: const TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 14,
+                          color: Color(0xFF7D8388),
+                        ),
                       ),
+                    );
+                  }
+
+                  return ListView.separated(
+                    padding: EdgeInsets.zero,
+                    itemCount: visibleWords.length,
+                    separatorBuilder: (context, index) => const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Color(0xFFEAEBEC),
                     ),
+                    itemBuilder: (context, index) {
+                      final word = visibleWords[index];
+                      return SizedBox(
+                        height: 66,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      word.word,
+                                      style: const TextStyle(
+                                        fontFamily: 'Nunito',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.3,
+                                        color: Color(0xFF2E2E2E),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      word.subtitle,
+                                      style: const TextStyle(
+                                        fontFamily: 'Nunito',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1.5,
+                                        color: Color(0xFF7D8388),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CustomPaint(
+                                  painter: _WordSignalPainter(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
